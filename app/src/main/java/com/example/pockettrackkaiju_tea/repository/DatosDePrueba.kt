@@ -132,7 +132,7 @@ object DatosDePrueba {
     val movimientos = listOf(
         Movimiento(
             id = "MOV-1",
-            codigoProducto = "P-001",
+            codigoProducto = "KAI-001",
             tipo = TipoMovimiento.ENTRADA,
             cantidad = 20,
             motivo = "Recepción de mercadería de proveedor",
@@ -141,7 +141,7 @@ object DatosDePrueba {
         ),
         Movimiento(
             id = "MOV-2",
-            codigoProducto = "P-002",
+            codigoProducto = "KAI-002",
             tipo = TipoMovimiento.SALIDA_VENTA,
             cantidad = 5,
             motivo = "Venta Nro. 1042",
@@ -150,7 +150,7 @@ object DatosDePrueba {
         ),
         Movimiento(
             id = "MOV-3",
-            codigoProducto = "P-004",
+            codigoProducto = "KAI-004",
             tipo = TipoMovimiento.SALIDA_CONSUMO,
             cantidad = 1,
             motivo = "Uso interno en limpieza de local",
@@ -159,7 +159,7 @@ object DatosDePrueba {
         ),
         Movimiento(
             id = "MOV-4",
-            codigoProducto = "P-007",
+            codigoProducto = "KAI-007",
             tipo = TipoMovimiento.AJUSTE,
             cantidad = 2,
             motivo = "Ajuste por producto dañado en góndola",
