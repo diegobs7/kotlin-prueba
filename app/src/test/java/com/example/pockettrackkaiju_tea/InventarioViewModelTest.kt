@@ -1,6 +1,8 @@
 package com.example.pockettrackkaiju_tea
 
+import com.example.pockettrackkaiju_tea.model.CategoriaProducto
 import com.example.pockettrackkaiju_tea.model.Producto
+import com.example.pockettrackkaiju_tea.model.TipoProducto
 import com.example.pockettrackkaiju_tea.viewmodel.InventarioViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -19,27 +21,27 @@ class InventarioViewModelTest {
 
     @Test
     fun buscarProductoPorCodigoIgnoraMayusculas() {
-        assertNotNull(viewModel.buscarProducto("p-001"))
+        assertNotNull(viewModel.buscarProducto("kai-001"))
     }
 
     @Test
     fun alertaCuandoStockEsMenorOIgualAlMinimo() {
-        // P-002: stock 3, mínimo 8 → en alerta · P-001: stock 25, mínimo 10 → no
-        assertTrue(viewModel.estaEnAlerta(viewModel.buscarProducto("P-002")!!))
-        assertFalse(viewModel.estaEnAlerta(viewModel.buscarProducto("P-001")!!))
+        // KAI-004: stock 4, mínimo 5 → en alerta · KAI-001: stock 25, mínimo 10 → no
+        assertTrue(viewModel.estaEnAlerta(viewModel.buscarProducto("KAI-004")!!))
+        assertFalse(viewModel.estaEnAlerta(viewModel.buscarProducto("KAI-001")!!))
     }
 
     @Test
     fun historialDeUnProductoSoloTraeSusMovimientos() {
-        assertEquals(1, viewModel.movimientosDe("P-002").size)
+        assertEquals(1, viewModel.movimientosDe("KAI-004").size)
     }
 
     private fun productoDePrueba(codigo: String, precio: Int = 1000) = Producto(
         codigo = codigo,
         nombre = "Producto de prueba",
         descripcion = "",
-        categoria = "Abarrotes",
-        tipo = "Alimento",
+        categoria = CategoriaProducto.OTROS,
+        tipo = TipoProducto.ACCESORIOS,
         precio = precio,
         stockActual = 5,
         stockMinimo = 2
@@ -47,18 +49,18 @@ class InventarioViewModelTest {
 
     @Test
     fun productoNuevoApareceEnElCatalogo() {
-        assertTrue(viewModel.agregarProducto(productoDePrueba("P-999")))
+        assertTrue(viewModel.agregarProducto(productoDePrueba("KAI-999")))
         assertEquals(11, viewModel.productos.value.size)
     }
 
     @Test
     fun rechazaCodigoRepetido() {
-        assertFalse(viewModel.agregarProducto(productoDePrueba("P-001")))
+        assertFalse(viewModel.agregarProducto(productoDePrueba("KAI-001")))
         assertEquals(10, viewModel.productos.value.size)
     }
 
     @Test
     fun rechazaPrecioCero() {
-        assertFalse(viewModel.agregarProducto(productoDePrueba("P-998", precio = 0)))
+        assertFalse(viewModel.agregarProducto(productoDePrueba("KAI-998", precio = 0)))
     }
 }
